@@ -26,7 +26,14 @@ public class WebDriverService {
                 webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
     }
 
-    public WebDriver getDriver(){
+    public void init() {
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        this.driver = driver;
+    }
+
+    public WebDriver getDriver() {
         return this.driver;
     }
 
@@ -42,7 +49,7 @@ public class WebDriverService {
         return this.driver.findElement(By.cssSelector(selector));
     }
 
-    public void quite(){
+    public void quite() {
         this.driver.quit();
     }
 }
